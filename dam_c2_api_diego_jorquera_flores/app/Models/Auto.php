@@ -9,6 +9,7 @@ class Auto extends Model
 {
     use HasFactory;
 
+    public $incrementing = false;
     protected $primaryKey = 'vin';
     protected $fillable = ['vin', 'marca', 'modelo','año','precio'];
 }
