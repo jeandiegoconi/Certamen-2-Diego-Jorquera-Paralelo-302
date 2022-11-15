@@ -42,7 +42,9 @@ class _TabsAutosPageState extends State<TabsAutosPage> {
                           title: Text(snapshot.data[index]['marca']),
                           subtitle: Text(snapshot.data[index]['modelo'] +
                               " Año " +
-                              '${snapshot.data[index]['año']}'),
+                              '${snapshot.data[index]['año']}' +
+                              " vin: " +
+                              '${snapshot.data[index]['vin']}'),
                           trailing:
                               Text('${snapshot.data[index]['precio']} CLP'));
                     },
