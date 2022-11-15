@@ -1,14 +1,15 @@
 import "package:flutter/material.dart";
 import 'package:intl/intl.dart';
+import 'package:dam_c2_cliente_diego_jorquera/providers/autos_provider.dart';
 
-class FormPage extends StatefulWidget {
-  FormPage({Key? key}) : super(key: key);
+class EliminarAuto extends StatefulWidget {
+  EliminarAuto({Key? key}) : super(key: key);
 
   @override
-  State<FormPage> createState() => _FormPageState();
+  State<EliminarAuto> createState() => _EliminarAutoState();
 }
 
-class _FormPageState extends State<FormPage> {
+class _EliminarAutoState extends State<EliminarAuto> {
   final formKey = GlobalKey<FormState>();
   final regexEmail =
       r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
@@ -20,26 +21,10 @@ class _FormPageState extends State<FormPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Formulario"),
-        elevation: 0,
-      ),
       body: Form(
         key: formKey,
         child: Column(
           children: [
-            Container(
-              padding: EdgeInsets.fromLTRB(10, 10, 10, 20),
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                  color: Colors.redAccent,
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(10))),
-              child: Text(
-                "Formulario de matricula USM",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-            ),
             Expanded(
                 child: Padding(
               padding: const EdgeInsets.all(5.0),
@@ -48,7 +33,21 @@ class _FormPageState extends State<FormPage> {
                   fieldText("Vni"),
                 ],
               ),
-            ))
+            )),
+            Spacer(),
+            Container(
+              padding: EdgeInsets.all(5),
+              width: double.infinity,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Colors.red,
+                    padding: EdgeInsets.all(10),
+                    textStyle:
+                        TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                child: Text('Eliminar Auto'),
+                onPressed: () => EliminarAuto(),
+              ),
+            ),
           ],
         ),
       ),
@@ -61,9 +60,6 @@ class _FormPageState extends State<FormPage> {
       validator: (nombres) {
         if (nombres!.isEmpty) {
           return "Ingrese " + text;
-        }
-        if (text == "Email" && !RegExp(regexEmail).hasMatch(nombres)) {
-          return "Formato de Email no válido";
         }
         return null;
       },
