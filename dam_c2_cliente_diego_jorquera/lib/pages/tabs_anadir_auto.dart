@@ -125,5 +125,37 @@ class _AddPageState extends State<AddPage> {
     AutoProvider provider = new AutoProvider();
     var data = await provider.addAuto(vin.value.text, marca.value.text,
         modelo.value.text, int.parse(ano.text), int.parse(precio.value.text));
+
+    if (data == null) {
+      Navigator.pop(context);
+    } else {
+      setState(() {
+        if (data['errors']['vin'] == null) {
+          errVin = '';
+        } else {
+          errVin = data['errors']['vin'][0];
+        }
+        if (data['errors']['marca'] == null) {
+          errMarca = '';
+        } else {
+          errMarca = data['errors']['marca'][0];
+        }
+        if (data['errors']['modelo'] == null) {
+          errModelo = '';
+        } else {
+          errModelo = data['errors']['modelo'][0];
+        }
+        if (data['errors']['año'] == null) {
+          errAno = '';
+        } else {
+          errAno = data['errors']['año'][0];
+        }
+        if (data['errors']['precio'] == null) {
+          errPrecio = '';
+        } else {
+          errPrecio = data['errors']['precio'][0];
+        }
+      });
+    }
   }
 }

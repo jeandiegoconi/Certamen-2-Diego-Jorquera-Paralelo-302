@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('año');
             $table->integer('precio');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
