@@ -1,3 +1,4 @@
+import 'package:dam_c2_cliente_diego_jorquera/pages/tabs_anadir_auto.dart';
 import 'package:flutter/material.dart';
 import 'package:dam_c2_cliente_diego_jorquera/pages/tabs_autos_page.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -8,7 +9,7 @@ class TabsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-      length: 1,
+      length: 2,
       child: Scaffold(
         appBar: AppBar(
           title: Text('DAM C2 Diego Jorquera'),
@@ -16,11 +17,15 @@ class TabsPage extends StatelessWidget {
           bottom: TabBar(
             tabs: [
               Tab(text: 'Lista de Autos'),
+              Tab(
+                text: 'Añadir Auto',
+              )
             ],
           ),
         ),
         body: TabBarView(children: [
           TabsAutosPage(),
+          AddPage()
           // TabsCalculadoraPage(),
         ]),
       ),
