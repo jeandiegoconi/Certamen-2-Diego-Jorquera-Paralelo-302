@@ -73,6 +73,10 @@ class AutosController extends Controller
      */
     public function destroy(Auto $auto)
     {
-        //
+        $auto->delete();
+        return response()->json([
+            'res' => true,
+            'mensaje' => 'Eliminado Correctamente.'
+        ],200);
     }
 }
