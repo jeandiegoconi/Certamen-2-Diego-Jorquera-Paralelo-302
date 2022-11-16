@@ -11,12 +11,8 @@ class EliminarAuto extends StatefulWidget {
 
 class _EliminarAutoState extends State<EliminarAuto> {
   final formKey = GlobalKey<FormState>();
-  final regexEmail =
-      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+";
-  DateTime fechaSeleccionada = DateTime.now();
-  var fFecha = DateFormat("dd-MM-yyyy");
-  String jornadaSeleccionada = "d";
-  bool gratuidad = false;
+  AutoProvider provider = new AutoProvider();
+  TextEditingController vin = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +26,11 @@ class _EliminarAutoState extends State<EliminarAuto> {
               padding: const EdgeInsets.all(5.0),
               child: ListView(
                 children: [
-                  fieldText("Vni"),
+                  TextFormField(
+                    controller: vin,
+                    decoration: InputDecoration(
+                        labelText: 'Vin', hintText: 'Escriba el Vin del auto'),
+                  ),
                 ],
               ),
             )),
@@ -45,26 +45,14 @@ class _EliminarAutoState extends State<EliminarAuto> {
                     textStyle:
                         TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                 child: Text('Eliminar Auto'),
-                onPressed: () => EliminarAuto(),
+                onPressed: () => {
+                  provider.borrarAuto(vin.text.toString().trim()),
+                },
               ),
             ),
           ],
         ),
       ),
-    );
-  }
-
-  TextFormField fieldText(String text) {
-    return TextFormField(
-      decoration: InputDecoration(labelText: text + ": "),
-      validator: (nombres) {
-        if (nombres!.isEmpty) {
-          return "Ingrese " + text;
-        }
-        return null;
-      },
-      keyboardType:
-          text == "Email" ? TextInputType.emailAddress : TextInputType.name,
     );
   }
 }

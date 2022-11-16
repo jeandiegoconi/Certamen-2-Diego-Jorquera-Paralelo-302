@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dam_c2_cliente_diego_jorquera/providers/autos_provider.dart';
+import 'package:intl/intl.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class TabsAutosPage extends StatefulWidget {
@@ -14,6 +15,7 @@ class _TabsAutosPageState extends State<TabsAutosPage> {
 
   @override
   Widget build(BuildContext context) {
+    final currencyFormatter = NumberFormat.simpleCurrency(decimalDigits: 0);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Column(
@@ -37,6 +39,7 @@ class _TabsAutosPageState extends State<TabsAutosPage> {
                   return ListView.builder(
                     itemCount: snapshot.data.length,
                     itemBuilder: (context, index) {
+                      String precio = '${snapshot.data[index]['precio']}';
                       return ListTile(
                           leading: Icon(MdiIcons.car),
                           title: Text(snapshot.data[index]['marca']),
@@ -45,8 +48,9 @@ class _TabsAutosPageState extends State<TabsAutosPage> {
                               '${snapshot.data[index]['año']}' +
                               " vin: " +
                               '${snapshot.data[index]['vin']}'),
-                          trailing:
-                              Text('${snapshot.data[index]['precio']} CLP'));
+                          trailing: Text(
+                              currencyFormatter.format(int.parse(precio)) +
+                                  " CLP"));
                     },
                   );
                 }

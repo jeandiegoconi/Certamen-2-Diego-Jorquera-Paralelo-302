@@ -42,7 +42,8 @@ class AutoProvider {
   }
 
   Future<http.Response> borrarAuto(String vin) async {
-    var url = Uri.parse(apiURL);
+    var url = Uri.parse('$apiURL/$vin');
     return await http.delete(url);
+    print('ok');
   }
 }
